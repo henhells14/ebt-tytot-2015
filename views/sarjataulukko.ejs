@@ -6,13 +6,88 @@
 
 <main class="sarja">
     <div class="sarja-section">
-     
         <div class="sarja-text">
             <h1>Sarjataulukko 1-divari</h1>
             <p>Pelaamme 2015 syntyneiden tyttöjen sarjoja sekä 1.- että 2.-divisioonassa.</p>
-         
         </div>
     </div>
+
+    <div class="standings-wrapper" id="standingsContent">
+        <p style="text-align: center; padding: 2rem; width: 100%;">Ladataan sarjataulukkoja...</p>
+    </div>
 </main>
+
+<script>
+    document.addEventListener('DOMContentLoaded', async function() {
+        try {
+            const response = await fetch('/api/sarjataulukko');
+            const data = await response.json();
+            
+            const html = `
+                <div class="division">
+                    <h2>1. Divisioona</h2>
+                    <table class="standings-table">
+                        <thead>
+                            <tr>
+                                <th>Sija</th>
+                                <th>Joukkue</th>
+                                <th>Ottelut</th>
+                                <th>Voitot</th>
+                                <th>Tappiot</th>
+                                <th>Pisteet</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${data.div1.teams.map((team, index) => `
+                                <tr>
+                                    <td>${index + 1}</td>
+                                    <td>${team.team_name}</td>
+                                    <td>${team.matches_played}</td>
+                                    <td>${team.matches_won}</td>
+                                    <td>${team.matches_lost}</td>
+                                    <td>${team.points}</td>
+                                </tr>
+                            `).join('')}
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="division">
+                    <h2>2. Divisioona</h2>
+                    <table class="standings-table">
+                        <thead>
+                            <tr>
+                                <th>Sija</th>
+                                <th>Joukkue</th>
+                                <th>Ottelut</th>
+                                <th>Voitot</th>
+                                <th>Tappiot</th>
+                                <th>Pisteet</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${data.div2.teams.map((team, index) => `
+                                <tr>
+                                    <td>${index + 1}</td>
+                                    <td>${team.team_name}</td>
+                                    <td>${team.matches_played}</td>
+                                    <td>${team.matches_won}</td>
+                                    <td>${team.matches_lost}</td>
+                                    <td>${team.points}</td>
+                                </tr>
+                            `).join('')}
+                        </tbody>
+                    </table>
+                </div>
+            `;
+            
+            document.getElementById('standingsContent').innerHTML = html;
+        } catch (error) {
+            console.error('Error loading standings:', error);
+            document.getElementById('standingsContent').innerHTML = 
+                '<p style="color: red; text-align: center; width: 100%;">Virhe sarjataulukoiden lataamisessa</p>';
+        }
+    });
+</script>
 
 <%- include('partials/footer') %>

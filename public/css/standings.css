@@ -1,0 +1,94 @@
+/* Sarjataulukko sivu */
+.standings-page {
+    margin-top: 100px;
+    min-height: calc(100vh - 140px);
+}
+
+.standings-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.standings-container h1 {
+    text-align: center;
+    color: #e91e63;
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    text-shadow: 2px 2px 4px rgba(233, 30, 99, 0.2);
+}
+
+.standings-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.division {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 15px;
+    padding: 2rem;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.division h2 {
+    color: #e91e63;
+    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
+    border-bottom: 3px solid #e91e63;
+    padding-bottom: 0.5rem;
+}
+
+.standings-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.95rem;
+}
+
+.standings-table thead {
+    background: linear-gradient(45deg, #e91e63, #ad1457);
+    color: white;
+}
+
+.standings-table th {
+    padding: 1rem;
+    text-align: left;
+    font-weight: bold;
+}
+
+.standings-table td {
+    padding: 1rem;
+    border-bottom: 1px solid #eee;
+}
+
+.standings-table tbody tr:hover {
+    background: #f5f5f5;
+    transition: background 0.3s ease;
+}
+
+.standings-table tbody tr:nth-child(1) {
+    background: rgba(233, 30, 99, 0.1);
+    font-weight: bold;
+}
+
+/* Responsivesuus */
+@media (max-width: 768px) {
+    .standings-wrapper {
+        grid-template-columns: 1fr;
+    }
+    
+    .standings-container h1 {
+        font-size: 2rem;
+    }
+    
+    .standings-table {
+        font-size: 0.85rem;
+    }
+    
+    .standings-table th,
+    .standings-table td {
+        padding: 0.7rem 0.5rem;
+    }
+}

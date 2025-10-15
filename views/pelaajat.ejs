@@ -1,18 +1,54 @@
 <%- include('partials/header') %>
 <%- include('partials/navbar') %>
 
-<!-- Koripallo logo oikeaan laitaan -->
-<div class="basketball-logo"></div>
+<main>
+ 
 
-<main class="sarja">
-    <div class="sarja-section">
-     
-        <div class="sarja-text">
-            <h1>EBT Tytöt 2015</h1>
-            <p>Tässä esittelyssä iloinen joukkueemme.</p>
-         
-        </div>
+  <!-- Pelaajagalleria -->
+  <div class="players-grid">
+
+     <!-- Otsikko gridin sisällä -->
+    <div style="grid-column: 1 / -1; text-align: center; margin-bottom: 2rem;">
+      <h1>Pelaajat kaudella 2025-26 EBT Tytöt 2015</h1>
     </div>
+
+    <% players.forEach(player => { %>
+      <div class="player-card" onclick="openModal(<%= player.id %>)">
+        <img src="/images/players/<%= player.image %>" alt="<%= player.name %>">
+        <h3><%= player.name %></h3>
+      </div>
+    <% }) %>
+  </div>
+
+  <!-- Modal -->
+  <div id="playerModal" class="modal">
+    <div class="modal-overlay" onclick="closeModal()"></div>
+    <div class="modal-content">
+      <button class="modal-close" onclick="closeModal()">&times;</button>
+      <div class="modal-body">
+        <img id="modalImage" src="" alt="">
+        <div class="modal-info">
+          <h2 id="modalName"></h2>
+          <p id="modalBirthdate"></p>
+          <p id="modalPosition"></p>
+          <div class="modal-motto">
+            <strong>Motto:</strong>
+            <p id="modalMotto"></p>
+          </div>
+          <div class="modal-about">
+            <strong>Mitä sanot EBT T-15 joukkueesta?</strong>
+            <p id="modalAbout"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </main>
 
 <%- include('partials/footer') %>
+
+<!-- Pelaajadata JavaScript:lle -->
+<script>
+  const playersData = <%- JSON.stringify(players) %>;
+</script>
+<script src="/js/players.js"></script>

@@ -1,0 +1,173 @@
+[
+  {
+    "id": 1,
+    "name": "Helvi",
+    "birthdate": "12.7.2015",
+    "position": "Pelintekijä",
+    "motto": "Taistele joka pallosta ja voita ne itsellesi.",
+    "about": "Meillä tosi kiva joukkuehenki ja täällä on tosi kivoja kavereita. Valmentaja Niko on ihan paras",
+    "image": "helvi.jpg"
+  },
+  {
+    "id": 2,
+    "name": "Isabella",
+    "birthdate": "",
+    "position": "",
+    "motto": "",
+    "about": "",
+    "image": "isabella.jpg"
+  },
+  {
+    "id": 3,
+    "name": "Evi",
+    "birthdate": "",
+    "position": "",
+    "motto": "",
+    "about": "",
+    "image": "evi2.jpg"
+  },
+  {
+    "id": 4,
+    "name": "Molly",
+    "birthdate": "",
+    "position": "",
+    "motto": "",
+    "about": "",
+    "image": "molly2.jpg"
+  },
+  {
+    "id": 5,
+    "name": "Lotta",
+    "birthdate": "",
+    "position": "",
+    "motto": "",
+    "about": "",
+    "image": "lotta.jpg"
+  },
+  {
+    "id": 6,
+    "name": "Cessi",
+    "birthdate": "",
+    "position": "",
+    "motto": "",
+    "about": "",
+    "image": "cessi2.jpg"
+  },
+  {
+    "id": 7,
+    "name": "Aili",
+    "birthdate": "",
+    "position": "",
+    "motto": "",
+    "about": "",
+    "image": "aili.jpg"
+  },
+  {
+    "id": 8,
+    "name": "Adele",
+    "birthdate": "",
+    "position": "",
+    "motto": "",
+    "about": "",
+    "image": "adele.jpg"
+  },
+  {
+    "id": 9,
+    "name": "Ellen",
+    "birthdate": "",
+    "position": "",
+    "motto": "",
+    "about": "",
+    "image": "ellen.jpg"
+  },
+  {
+    "id": 10,
+    "name": "Kristina",
+    "birthdate": "",
+    "position": "",
+    "motto": "",
+    "about": "",
+    "image": "kristina.jpg"
+  },
+  {
+    "id": 11,
+    "name": "Lilli",
+    "birthdate": "",
+    "position": "",
+    "motto": "",
+    "about": "",
+    "image": "lilli2.jpg"
+  },
+  {
+    "id": 12,
+    "name": "Sanni",
+    "birthdate": "",
+    "position": "",
+    "motto": "",
+    "about": "",
+    "image": "sanni.jpg"
+  },
+  {
+    "id": 13,
+    "name": "Stella",
+    "birthdate": "",
+    "position": "",
+    "motto": "",
+    "about": "",
+    "image": "stella.jpg"
+  },
+  {
+    "id": 14,
+    "name": "Linnea",
+    "birthdate": "",
+    "position": "",
+    "motto": "",
+    "about": "",
+    "image": "linnea.jpg"
+  },
+  {
+    "id": 15,
+    "name": "Tuana",
+    "birthdate": "",
+    "position": "",
+    "motto": "",
+    "about": "",
+    "image": "EBT-logo-pink.png"
+  },
+  {
+    "id": 16,
+    "name": "Saga",
+    "birthdate": "",
+    "position": "",
+    "motto": "",
+    "about": "",
+    "image": "EBT-logo-pink.png"
+  },
+  {
+    "id": 17,
+    "name": "Viola",
+    "birthdate": "",
+    "position": "",
+    "motto": "",
+    "about": "",
+    "image": "viola2.jpg"
+  },
+  {
+    "id": 18,
+    "name": "Stella",
+    "birthdate": "",
+    "position": "",
+    "motto": "",
+    "about": "",
+    "image": "stella-2.jpg"
+  },
+  {
+    "id": 19,
+    "name": "Emelie",
+    "birthdate": "",
+    "position": "",
+    "motto": "",
+    "about": "",
+    "image": "EBT-logo-pink.png"
+  }
+]

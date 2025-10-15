@@ -1,0 +1,345 @@
+/* ==================== PELAAJAT SIVU ==================== */
+
+main {
+  padding: 2rem;
+  max-width: 1400px;
+  margin: 0 auto;
+  margin-top: 8rem; 
+  min-height: calc(100vh - 200px);
+}
+
+/* Otsikko */
+
+main h1 {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+  color: #ff1493;
+  font-weight: bold;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* ==================== PELAAJAGRID ==================== */
+
+.players-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr); /* 7 pelaajaa rivissä */
+  gap: 2rem;
+  padding: 2rem;
+  background: linear-gradient(135deg, #e0e0e0 0%, #f5f5f5 100%);
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+   position: relative; 
+  z-index: 10; 
+}
+
+/* Pelaajan kortti */
+.player-card {
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.player-card:hover {
+  transform: translateY(-10px) scale(1.05);
+}
+
+.player-card img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 3/4; /* Kuvasuhde 3:4 kuten kuvissasi */
+  object-fit: cover;
+  border-radius: 15px;
+  border: 4px solid #333;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+}
+
+.player-card:hover img {
+  border-color: #ff1493; /* Pinkkiä hoverissa */
+  box-shadow: 0 8px 20px rgba(255, 20, 147, 0.4);
+}
+
+.player-card h3 {
+  margin-top: 1rem;
+  font-size: 1.2rem;
+  color: #333;
+  font-weight: bold;
+}
+
+/* ==================== MODAL (Ponnahdusikkuna) ==================== */
+
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1000;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.modal.active {
+  display: flex;
+  opacity: 1;
+  animation: fadeIn 0.3s ease;
+}
+
+/* Tumma tausta */
+.modal-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+}
+
+/* Modal sisältö */
+.modal-content {
+  position: relative;
+  background: linear-gradient(135deg, #ff1493 0%, #ff69b4 100%);
+  margin: auto;
+  padding: 3rem;
+  border-radius: 20px;
+  max-width: 800px;
+  width: 90%;
+  z-index: 1001;
+  animation: slideIn 0.3s ease;
+  box-shadow: 0 10px 50px rgba(0, 0, 0, 0.5);
+}
+
+/* Sulkemisnappi */
+.modal-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: white;
+  border: none;
+  font-size: 2rem;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: #333;
+  font-weight: bold;
+}
+
+.modal-close:hover {
+  background: #ff1493;
+  color: white;
+  transform: rotate(90deg);
+}
+
+/* Modal sisältö layout */
+.modal-body {
+  display: flex;
+  gap: 2rem;
+  color: white;
+}
+
+.modal-body img {
+  width: 300px;
+  height: 400px;
+  object-fit: cover;
+  border-radius: 15px;
+  border: 4px solid white;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+}
+
+.modal-info {
+  flex: 1;
+}
+
+.modal-info h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: white;
+}
+
+.modal-info p {
+  margin-bottom: 0.5rem;
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+.modal-motto,
+.modal-about {
+  margin-top: 1.5rem;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+}
+
+.modal-motto strong,
+.modal-about strong {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-size: 1.2rem;
+}
+
+/* ==================== ANIMAATIOT ==================== */
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    transform: scale(0.8) translateY(-50px);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+  }
+}
+
+
+
+/* ==================== RESPONSIIVISUUS ==================== */
+
+/* Tablet */
+@media (max-width: 1200px) {
+  .players-grid {
+    grid-template-columns: repeat(4, 1fr); /* 4 kuvaa rivissä */
+    gap: 1.5rem;
+    padding: 1.5rem;
+  }
+  
+  main h1 {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  main {
+    padding: 1rem;
+    margin-top: 6rem; /* Vähemmän tilaa ylhäällä */
+  }
+  
+  main h1 {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .players-grid {
+    grid-template-columns: repeat(3, 1fr); /* 3 kuvaa rivissä */
+    gap: 1rem;
+    padding: 1rem;
+  }
+  
+  /* Modal mobiilissa */
+  .modal-content {
+    width: 95%;
+    padding: 2rem 1rem;
+    max-height: 90vh;
+    overflow-y: auto;
+  }
+  
+  .modal-body {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .modal-body img {
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+    margin: 0 auto;
+  }
+  
+  .modal-info h2 {
+    font-size: 1.5rem;
+  }
+  
+  .modal-info p {
+    font-size: 1rem;
+  }
+  
+  .player-card h3 {
+    font-size: 1rem;
+  }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  main {
+    padding: 0.5rem;
+    margin-top: 5rem;
+  }
+  
+  main h1 {
+    font-size: 1.3rem;
+    padding: 0 0.5rem;
+  }
+  
+  .players-grid {
+    grid-template-columns: repeat(2, 1fr); /* 2 kuvaa rivissä */
+    gap: 0.8rem;
+    padding: 0.8rem;
+  }
+  
+  .player-card h3 {
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+  }
+  
+  /* Modal pienellä näytöllä */
+  .modal-content {
+    padding: 1.5rem 0.8rem;
+    border-radius: 15px;
+  }
+  
+  .modal-close {
+    width: 35px;
+    height: 35px;
+    font-size: 1.5rem;
+    top: 0.5rem;
+    right: 0.5rem;
+  }
+  
+  .modal-body img {
+    max-width: 250px;
+  }
+  
+  .modal-info h2 {
+    font-size: 1.3rem;
+  }
+  
+  .modal-motto,
+  .modal-about {
+    padding: 0.8rem;
+    margin-top: 1rem;
+  }
+  
+  .modal-motto strong,
+  .modal-about strong {
+    font-size: 1rem;
+  }
+}
+
+/* Erittäin pieni näyttö */
+@media (max-width: 360px) {
+  .players-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem;
+    padding: 0.5rem;
+  }
+  
+  main h1 {
+    font-size: 1.1rem;
+  }
+  
+  .player-card h3 {
+    font-size: 0.8rem;
+  }
+}
