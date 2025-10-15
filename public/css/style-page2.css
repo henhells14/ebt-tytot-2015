@@ -12,10 +12,10 @@
     grid-template-columns: 1fr 1fr;
     gap: 3rem;
     align-items: center;
-    margin: 12rem 0;
-    background: rgba(255, 255, 255, 0.95);
+    margin: 6rem 0;
+    background: rgba(0, 0, 0, 30%);
     border-radius: 20px;
-    padding: 3rem;
+    padding: 0rem;
     backdrop-filter: blur(10px);
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
 
@@ -35,7 +35,7 @@
 
 .sarja-text p {
     font-size: 1.2rem;
-    color: #666;
+    color: #fffcfc;
     margin-bottom: 2rem;
     line-height: 1.8;
 }
