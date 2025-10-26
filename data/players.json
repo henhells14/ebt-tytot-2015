@@ -123,7 +123,7 @@
     "position": "Pieni laitahyökkääjä",
     "motto": "Voittaminen alkaa harjoituksista.",
     "about": "Me treenataan kovaa mutta nauretaan myös paljon. Niko on superhyvä valmentaja.",
-    "image": "linnea.jpg"
+    "image": "linnea2.jpg"
   },
   {
     "id": 15,
@@ -132,7 +132,7 @@
     "position": "Pieni laitahyökkääjä",
     "motto": "Pieni joukkue, suuri sydän.",
     "about": "Meillä on hyvä yhteishenki ja kivoja pelaajia. Valmentaja on tosi kannustava.",
-    "image": "EBT-logo-pink.png"
+    "image": "tuana2.jpg"
   },
   {
     "id": 16,
@@ -141,7 +141,7 @@
     "position": "Iso laitahyökkääjä",
     "motto": "Anna kaikkesi – myös harjoituksissa.",
     "about": "Täällä on tosi hyvä meininki ja paljon kavereita. Niko osaa innostaa meitä.",
-    "image": "EBT-logo-pink.png"
+    "image": "saga.jpg"
   },
   {
     "id": 17,
@@ -168,6 +168,6 @@
     "position": "Heittävä takatyttö",
     "motto": "Asenne voittaa taidon, jos tahto on tarpeeksi suuri.",
     "about": "EBT:ssä on ihan paras joukkue! Kaikki on ystävällisiä ja valmentaja Niko on tosi hyvä.",
-    "image": "EBT-logo-pink.png"
+    "image": "emelie.jpg"
   }
 ]
