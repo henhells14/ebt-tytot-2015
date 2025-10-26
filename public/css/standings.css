@@ -104,3 +104,94 @@
         padding: 0.7rem 0.5rem;
     }
 }
+/* ========== EBT:N OTTELUT ========== */
+
+.ebt-matches-section {
+    max-width: 1200px;
+    margin: 3rem auto;
+    padding: 0 2rem;
+}
+
+.matches-division {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 15px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.matches-division h3 {
+    color: #e91e63;
+    margin-bottom: 1.5rem;
+    font-size: 1.3rem;
+    border-bottom: 3px solid #e91e63;
+    padding-bottom: 0.5rem;
+}
+
+.matches-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.95rem;
+}
+
+.matches-table thead {
+    background: linear-gradient(45deg, #e91e63, #ad1457);
+    color: white;
+}
+
+.matches-table th {
+    padding: 1rem;
+    text-align: center;
+    font-weight: bold;
+}
+
+.matches-table td {
+    padding: 1rem;
+    border-bottom: 1px solid #eee;
+    text-align: center;
+}
+
+.matches-table .score {
+    font-weight: bold;
+    font-size: 1.1rem;
+    color: #333;
+}
+
+/* EBT joukkueen korostus */
+.ebt-team {
+    font-weight: bold;
+    color: #e91e63;
+}
+
+/* EBT rivi sarjataulukossa */
+.ebt-row {
+    background: rgba(233, 30, 99, 0.15) !important;
+    font-weight: bold;
+}
+
+/* Voitot ja tappiot */
+.matches-table tr.win {
+    background: rgba(76, 175, 80, 0.1);
+}
+
+.matches-table tr.loss {
+    background: rgba(244, 67, 54, 0.1);
+}
+
+.matches-table tbody tr:hover {
+    background: #f5f5f5;
+    transition: background 0.3s ease;
+}
+
+/* Responsiivisuus */
+@media (max-width: 768px) {
+    .matches-table {
+        font-size: 0.85rem;
+    }
+    
+    .matches-table th,
+    .matches-table td {
+        padding: 0.7rem 0.3rem;
+    }
+}

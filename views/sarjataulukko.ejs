@@ -1,7 +1,6 @@
 <%- include('partials/header') %>
 <%- include('partials/navbar') %>
 
-<!-- Koripallo logo oikeaan laitaan -->
 <div class="basketball-logo"></div>
 
 <main class="sarja">
@@ -12,13 +11,20 @@
         </div>
     </div>
 
+    <!-- SARJATAULUKOT -->
     <div class="standings-wrapper" id="standingsContent">
         <p style="text-align: center; padding: 2rem; width: 100%;">Ladataan sarjataulukkoja...</p>
+    </div>
+
+    <!-- EBT:N OTTELUT -->
+    <div class="ebt-matches-section" id="ebtMatchesContent">
+        <p style="text-align: center; padding: 2rem;">Ladataan EBT:n otteluita...</p>
     </div>
 </main>
 
 <script>
     document.addEventListener('DOMContentLoaded', async function() {
+        // ========== SARJATAULUKOT ==========
         try {
             const response = await fetch('/api/sarjataulukko');
             const data = await response.json();
@@ -39,7 +45,7 @@
                         </thead>
                         <tbody>
                             ${data.div1.teams.map((team, index) => `
-                                <tr>
+                                <tr class="${team.team_name === 'EBT' ? 'ebt-row' : ''}">
                                     <td>${index + 1}</td>
                                     <td class="team-cell">
                                         <img src="${team.crest}" alt="${team.team_name}" class="team-logo">
@@ -70,7 +76,7 @@
                         </thead>
                         <tbody>
                             ${data.div2.teams.map((team, index) => `
-                                <tr>
+                                <tr class="${team.team_name === 'EBT' ? 'ebt-row' : ''}">
                                     <td>${index + 1}</td>
                                     <td class="team-cell">
                                         <img src="${team.crest}" alt="${team.team_name}" class="team-logo">
@@ -92,6 +98,96 @@
             console.error('Error loading standings:', error);
             document.getElementById('standingsContent').innerHTML = 
                 '<p style="color: red; text-align: center; width: 100%;">Virhe sarjataulukoiden lataamisessa</p>';
+        }
+
+        // ========== EBT:N OTTELUT ==========
+        try {
+            const matchesResponse = await fetch('/api/ebt-ottelut');
+            const matchesData = await matchesResponse.json();
+
+            let matchesHtml = '<h2 style="text-align: center; color: #e91e63; margin: 2rem 0;">EBT:n Pelatut Ottelut</h2>';
+
+            // 1. Divisioona ottelut
+            if (matchesData.div1.length > 0) {
+                matchesHtml += `
+                    <div class="matches-division">
+                        <h3>1. Divisioona</h3>
+                        <table class="matches-table">
+                            <thead>
+                                <tr>
+                                    <th>Päivä</th>
+                                    <th>Koti</th>
+                                    <th>Tulos</th>
+                                    <th>Vieras</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                ${matchesData.div1.map(match => {
+                                    const isEbtHome = match.team_A_name === 'EBT';
+                                    const isEbtWin = isEbtHome 
+                                        ? parseInt(match.fs_A) > parseInt(match.fs_B)
+                                        : parseInt(match.fs_B) > parseInt(match.fs_A);
+                                    
+                                    return `
+                                        <tr class="${isEbtWin ? 'win' : 'loss'}">
+                                            <td>${new Date(match.date).toLocaleDateString('fi-FI')}</td>
+                                            <td class="${isEbtHome ? 'ebt-team' : ''}">${match.team_A_name}</td>
+                                            <td class="score">${match.fs_A} - ${match.fs_B}</td>
+                                            <td class="${!isEbtHome ? 'ebt-team' : ''}">${match.team_B_name}</td>
+                                        </tr>
+                                    `;
+                                }).join('')}
+                            </tbody>
+                        </table>
+                    </div>
+                `;
+            }
+
+            // 2. Divisioona ottelut
+            if (matchesData.div2.length > 0) {
+                matchesHtml += `
+                    <div class="matches-division">
+                        <h3>2. Divisioona</h3>
+                        <table class="matches-table">
+                            <thead>
+                                <tr>
+                                    <th>Päivä</th>
+                                    <th>Koti</th>
+                                    <th>Tulos</th>
+                                    <th>Vieras</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                ${matchesData.div2.map(match => {
+                                    const isEbtHome = match.team_A_name === 'EBT';
+                                    const isEbtWin = isEbtHome 
+                                        ? parseInt(match.fs_A) > parseInt(match.fs_B)
+                                        : parseInt(match.fs_B) > parseInt(match.fs_A);
+                                    
+                                    return `
+                                        <tr class="${isEbtWin ? 'win' : 'loss'}">
+                                            <td>${new Date(match.date).toLocaleDateString('fi-FI')}</td>
+                                            <td class="${isEbtHome ? 'ebt-team' : ''}">${match.team_A_name}</td>
+                                            <td class="score">${match.fs_A} - ${match.fs_B}</td>
+                                            <td class="${!isEbtHome ? 'ebt-team' : ''}">${match.team_B_name}</td>
+                                        </tr>
+                                    `;
+                                }).join('')}
+                            </tbody>
+                        </table>
+                    </div>
+                `;
+            }
+
+            if (matchesData.div1.length === 0 && matchesData.div2.length === 0) {
+                matchesHtml += '<p style="text-align: center;">Ei pelattuja otteluita vielä.</p>';
+            }
+
+            document.getElementById('ebtMatchesContent').innerHTML = matchesHtml;
+        } catch (error) {
+            console.error('Error loading EBT matches:', error);
+            document.getElementById('ebtMatchesContent').innerHTML = 
+                '<p style="color: red; text-align: center;">Virhe otteluiden lataamisessa</p>';
         }
     });
 </script>

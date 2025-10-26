@@ -76,6 +76,64 @@ app.get('/api/sarjataulukko', async (req, res) => {
     }
 });
 
+// API endpoint EBT:n otteluille
+app.get('/api/ebt-ottelut', async (req, res) => {
+    try {
+        const apiUrl = process.env.BASKETBALL_API_URL;
+        const apiKey = process.env.BASKETBALL_API_KEY;
+
+        const EBT_TEAM_ID_DIV1 = '5753845';
+        const EBT_TEAM_ID_DIV2 = '5753846';
+
+        // Hae molemmat divisioonat
+        const [div1Response, div2Response] = await Promise.all([
+            // 1-divisioona ottelut
+            axios.get(`${apiUrl}/getMatches`, {
+                params: {
+                    api_key: apiKey,
+                    competition_id: 'etekp2526',
+                    category_id: '38751',
+                    group_id: '302370',
+                    team_id: EBT_TEAM_ID_DIV1 // LISÄTTY
+                }
+            }),
+            // 2-divisioona ottelut
+            axios.get(`${apiUrl}/getMatches`, {
+                params: {
+                    api_key: apiKey,
+                    competition_id: 'etekp2526',
+                    category_id: '38753',
+                    group_id: '302369',
+                    team_id: EBT_TEAM_ID_DIV2 // LISÄTTY
+                }
+            })
+        ]);
+
+        // Filtteröi vain pelatut ottelut (API palauttaa jo vain EBT:n ottelut)
+        const ebtDiv1Matches = div1Response.data.matches
+            ? div1Response.data.matches.filter(match => match.status === 'Played')
+            : [];
+
+        const ebtDiv2Matches = div2Response.data.matches
+            ? div2Response.data.matches.filter(match => match.status === 'Played')
+            : [];
+
+        res.json({
+            div1: ebtDiv1Matches,
+            div2: ebtDiv2Matches
+        });
+    } catch (error) {
+        console.error('Error fetching EBT matches:', error);
+        res.status(500).json({ 
+            error: error.message,
+            div1: [],
+            div2: []
+        });
+    }
+});
+
+
+
 // 404 - Sivua ei löydy
 app.use((req, res) => {
     res.status(404).render('404', { 
