@@ -7,25 +7,14 @@
 <main class="sarja">
     <div class="sarja-section">
         <div class="sarja-text">
-            <h1>Sarjataulukot EBT T-15</h1>
-            <p>Pelaamme 2015 syntyneiden tyttöjen sarjoja sekä 1. ja<br>
-                 2.-divisioonassa.</p>        
+            <h1>Sarjataulukko 1-divari</h1>
+            <p>Pelaamme 2015 syntyneiden tyttöjen sarjoja sekä 1.- että 2.-divisioonassa.</p>
         </div>
-        <div class="welcome-text">
-            <div class="team-photo">
-            <img src="/images/team-photo.jpg" alt="EBT Tytöt 2015 joukkuekuva" />
-        </div>
-            <div class="cta-buttons">
-               
-                <a href="/pelaajat" class="btn btn-secondary">Tutustu pelaajiin</a>
-            </div>
-        </div>
-        
     </div>
-         <div class="standings-wrapper" id="standingsContent">
+
+    <div class="standings-wrapper" id="standingsContent">
         <p style="text-align: center; padding: 2rem; width: 100%;">Ladataan sarjataulukkoja...</p>
-        </div>
-   
+    </div>
 </main>
 
 <script>
@@ -52,7 +41,10 @@
                             ${data.div1.teams.map((team, index) => `
                                 <tr>
                                     <td>${index + 1}</td>
-                                    <td>${team.team_name}</td>
+                                    <td class="team-cell">
+                                        <img src="${team.crest}" alt="${team.team_name}" class="team-logo">
+                                        <span>${team.team_name}</span>
+                                    </td>
                                     <td>${team.matches_played}</td>
                                     <td>${team.matches_won}</td>
                                     <td>${team.matches_lost}</td>
@@ -80,7 +72,10 @@
                             ${data.div2.teams.map((team, index) => `
                                 <tr>
                                     <td>${index + 1}</td>
-                                    <td>${team.team_name}</td>
+                                    <td class="team-cell">
+                                        <img src="${team.crest}" alt="${team.team_name}" class="team-logo">
+                                        <span>${team.team_name}</span>
+                                    </td>
                                     <td>${team.matches_played}</td>
                                     <td>${team.matches_won}</td>
                                     <td>${team.matches_lost}</td>
