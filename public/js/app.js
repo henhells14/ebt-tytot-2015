@@ -7,7 +7,7 @@ function toggleNav() {
     
     if (!navOpen) {
         // Avaa navigaatio - koripallo vierähtää oikealle (kaikkien nappien yli)
-        basketball.style.transform = 'translateX(500px) rotate(360deg)';
+        basketball.style.transform = 'translateX(570px) rotate(360deg)';
         navMenu.classList.add('show');
         navOpen = true;
     } else {

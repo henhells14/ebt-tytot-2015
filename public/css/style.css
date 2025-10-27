@@ -215,7 +215,7 @@ main {
     gap: 3rem;
     align-items: center;
     margin: 10rem 0 2rem 0;
-    background: rgba(255, 255, 255, 0.95);
+    background: rgba(255, 255, 255, 0.04);
     border-radius: 20px;
     padding: 3rem;
     backdrop-filter: blur(10px);
@@ -239,7 +239,18 @@ main {
 .team-photo img:hover {
     transform: scale(1.05);
 }
+.avaimenpera-photo img {
+    width: 100%;
+    max-width: 350px;
+    height: auto;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    transition: transform 0.3s ease;
+}
 
+.avaimenpera-photo img:hover {
+    transform: scale(1.05);
+}
 .welcome-text {
     padding: 1rem;
 }
@@ -248,12 +259,12 @@ main {
     font-size: 2.5rem;
     color: #F2059F;
     margin-bottom: 1rem;
-    text-shadow: 2px 2px 4px rgba(233, 30, 99, 0.2);
+    text-shadow: 2px 2px 4px rgba(17, 12, 13, 0.534);
 }
 
 .welcome-text p {
     font-size: 1.2rem;
-    color: #666;
+    color: #e1dfdf;
     margin-bottom: 2rem;
     line-height: 1.8;
 }

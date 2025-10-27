@@ -36,6 +36,15 @@ app.get('/sarjataulukko', (req, res) => {
     });
 });
 
+// Ottelut
+app.get('/ottelut', (req, res) => {
+    res.render('ottelut', { 
+        title: 'Tulevat ottelut - EBT Tytöt 2015',
+        page: 'ottelut'
+    });
+});
+
+
 // Pelaajat
 app.use('/pelaajat', playersRouter);
 
@@ -132,6 +141,66 @@ app.get('/api/ebt-ottelut', async (req, res) => {
     }
 });
 
+// API endpoint tuleville otteluille
+app.get('/api/tulevat-ottelut', async (req, res) => {
+    try {
+        const apiUrl = process.env.BASKETBALL_API_URL;
+        const apiKey = process.env.BASKETBALL_API_KEY;
+
+        const EBT_TEAM_ID_DIV1 = '5753845';
+        const EBT_TEAM_ID_DIV2 = '5753846';
+
+        // Hae molemmat divisioonat
+        const [div1Response, div2Response] = await Promise.all([
+            axios.get(`${apiUrl}/getMatches`, {
+                params: {
+                    api_key: apiKey,
+                    competition_id: 'etekp2526',
+                    category_id: '38751',
+                    group_id: '302370',
+                    team_id: EBT_TEAM_ID_DIV1
+                }
+            }),
+            axios.get(`${apiUrl}/getMatches`, {
+                params: {
+                    api_key: apiKey,
+                    competition_id: 'etekp2526',
+                    category_id: '38753',
+                    group_id: '302369',
+                    team_id: EBT_TEAM_ID_DIV2
+                }
+            })
+        ]);
+
+        // Filtteröi tulevat ottelut (ei ole vielä tulosta)
+        const upcomingDiv1 = div1Response.data.matches
+            ? div1Response.data.matches.filter(match => !match.fs_A && !match.fs_B)
+            : [];
+
+        const upcomingDiv2 = div2Response.data.matches
+            ? div2Response.data.matches.filter(match => !match.fs_A && !match.fs_B)
+            : [];
+
+        // Järjestä päivämäärän mukaan
+        const sortByDate = (a, b) => {
+            const dateA = new Date(a.date + 'T' + a.time);
+            const dateB = new Date(b.date + 'T' + b.time);
+            return dateA - dateB;
+        };
+
+        res.json({
+            div1: upcomingDiv1.sort(sortByDate),
+            div2: upcomingDiv2.sort(sortByDate)
+        });
+    } catch (error) {
+        console.error('Error fetching upcoming matches:', error);
+        res.status(500).json({ 
+            error: error.message,
+            div1: [],
+            div2: []
+        });
+    }
+});
 
 
 // 404 - Sivua ei löydy

@@ -1,0 +1,137 @@
+<%- include('partials/header') %>
+<%- include('partials/navbar') %>
+
+<div class="basketball-logo"></div>
+
+<main class="sarja">
+    <div class="sarja-section">
+         <div class="team-photo">
+            <img src="/images/pallo-ALLcity.jpg" alt="EBT Tytöt 2015 joukkuekuva" />
+        </div>
+        <div class="sarja-text">
+            <h1>EBT:n Tulevat Ottelut</h1>
+            <p>Tule kannustamaan tyttöjemme sarjoja sekä 1.- että 2.-divisioonassa!</p>
+        </div>
+    </div>
+
+    <!-- TULEVAT OTTELUT -->
+    <div class="upcoming-matches-wrapper" id="upcomingMatchesContent">
+        <p style="text-align: center; padding: 2rem; width: 100%;">Ladataan tulevia otteluita...</p>
+    </div>
+</main>
+
+<style>
+   
+</style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', async function() {
+        try {
+            const response = await fetch('/api/tulevat-ottelut');
+            const data = await response.json();
+
+            let html = '<div class="matches-container">';
+
+            // 1. Divisioona
+            if (data.div1.length > 0) {
+                html += `
+                    <div class="division-matches">
+                        <h2>🏀 1. Divisioona</h2>
+                        <div class="match-cards">
+                            ${data.div1.map(match => {
+                                const matchDate = new Date(match.date + 'T' + match.time);
+                                const isEbtHome = match.team_A_name === 'EBT';
+                                
+                                return `
+                                    <div class="match-card">
+                                        <div class="match-date">
+                                            📅 ${matchDate.toLocaleDateString('fi-FI', { 
+                                                weekday: 'short', 
+                                                day: 'numeric', 
+                                                month: 'numeric', 
+                                                year: 'numeric' 
+                                            })}
+                                        </div>
+                                        <div class="match-time">
+                                            🕐 Klo ${match.time.substring(0, 5)}
+                                        </div>
+                                        <div class="match-teams">
+                                            <div class="team ${isEbtHome ? 'ebt' : ''}">
+                                                ${match.team_A_name}
+                                            </div>
+                                            <div class="vs">VS</div>
+                                            <div class="team ${!isEbtHome ? 'ebt' : ''}">
+                                                ${match.team_B_name}
+                                            </div>
+                                        </div>
+                                        <div class="match-venue">
+                                            📍 <span class="match-venue-name">${match.venue_name}</span>, ${match.venue_city_name}
+                                        </div>
+                                    </div>
+                                `;
+                            }).join('')}
+                        </div>
+                    </div>
+                `;
+            }
+
+            // 2. Divisioona
+            if (data.div2.length > 0) {
+                html += `
+                    <div class="division-matches">
+                        <h2>🏀 2. Divisioona</h2>
+                        <div class="match-cards">
+                            ${data.div2.map(match => {
+                                const matchDate = new Date(match.date + 'T' + match.time);
+                                const isEbtHome = match.team_A_name === 'EBT';
+                                
+                                return `
+                                    <div class="match-card">
+                                        <div class="match-date">
+                                            📅 ${matchDate.toLocaleDateString('fi-FI', { 
+                                                weekday: 'short', 
+                                                day: 'numeric', 
+                                                month: 'numeric', 
+                                                year: 'numeric' 
+                                            })}
+                                        </div>
+                                        <div class="match-time">
+                                            🕐 Klo ${match.time.substring(0, 5)}
+                                        </div>
+                                        <div class="match-teams">
+                                            <div class="team ${isEbtHome ? 'ebt' : ''}">
+                                                ${match.team_A_name}
+                                            </div>
+                                            <div class="vs">VS</div>
+                                            <div class="team ${!isEbtHome ? 'ebt' : ''}">
+                                                ${match.team_B_name}
+                                            </div>
+                                        </div>
+                                        <div class="match-venue">
+                                            📍 <span class="match-venue-name">${match.venue_name}</span>, ${match.venue_city_name}
+                                        </div>
+                                    </div>
+                                `;
+                            }).join('')}
+                        </div>
+                    </div>
+                `;
+            }
+
+            // Jos ei otteluita
+            if (data.div1.length === 0 && data.div2.length === 0) {
+                html += '<div class="no-matches">🏀 Ei tulevia otteluita tällä hetkellä.</div>';
+            }
+
+            html += '</div>';
+            document.getElementById('upcomingMatchesContent').innerHTML = html;
+
+        } catch (error) {
+            console.error('Error loading upcoming matches:', error);
+            document.getElementById('upcomingMatchesContent').innerHTML = 
+                '<p style="color: red; text-align: center; width: 100%;">Virhe tulevien otteluiden lataamisessa</p>';
+        }
+    });
+</script>
+
+<%- include('partials/footer') %>

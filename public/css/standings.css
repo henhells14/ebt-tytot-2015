@@ -195,3 +195,79 @@
         padding: 0.7rem 0.3rem;
     }
 }
+
+/* ========== TULEVAT OTTELUT ========== */
+
+.upcoming-matches-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1rem;
+}
+
+.upcoming-match-card {
+    background: linear-gradient(135deg, #fff 0%, #f8f8f8 100%);
+    border: 2px solid #e91e63;
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 12px rgba(233, 30, 99, 0.15);
+    transition: all 0.3s ease;
+}
+
+.upcoming-match-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(233, 30, 99, 0.25);
+}
+
+.match-date {
+    font-size: 0.95rem;
+    color: #666;
+    margin-bottom: 1rem;
+    font-weight: 500;
+}
+
+.match-teams {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin: 1rem 0;
+    color: #333;
+}
+
+.match-teams .vs {
+    color: #e91e63;
+    font-size: 0.9rem;
+    font-weight: normal;
+}
+
+.match-venue {
+    font-size: 0.9rem;
+    color: #666;
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid #eee;
+}
+
+/* Responsiivisuus tuleviin otteluihin */
+@media (max-width: 768px) {
+    .upcoming-matches-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .upcoming-match-card {
+        padding: 1rem;
+    }
+    
+    .match-teams {
+        font-size: 1rem;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .match-teams .vs {
+        display: none;
+    }
+}
