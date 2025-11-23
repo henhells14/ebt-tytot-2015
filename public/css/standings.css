@@ -185,14 +185,40 @@
 }
 
 /* Responsiivisuus */
+/* Responsiivisuus mobiilille */
 @media (max-width: 768px) {
     .matches-table {
+        display: block;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    .matches-table table {
+        min-width: 100%;
         font-size: 0.85rem;
     }
     
     .matches-table th,
     .matches-table td {
-        padding: 0.7rem 0.3rem;
+        padding: 0.5rem 0.3rem;
+        white-space: nowrap;
+    }
+    
+    .matches-division {
+        padding: 1rem;
+        overflow: hidden;
+    }
+}
+
+/* Pienemmille näytöille */
+@media (max-width: 480px) {
+    .matches-table table {
+        font-size: 0.75rem;
+    }
+    
+    .matches-table th,
+    .matches-table td {
+        padding: 0.4rem 0.2rem;
     }
 }
 
