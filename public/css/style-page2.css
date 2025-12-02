@@ -28,6 +28,7 @@
 
 .sarja-text h1 {
     font-size: 2.5rem;
+    text-align: left;
     color: #F2059F;
     margin-bottom: 1rem;
     text-shadow: 2px 2px 4px rgba(233, 30, 99, 0.2);
