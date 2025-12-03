@@ -56,32 +56,37 @@ app.get('/api/sarjataulukko', async (req, res) => {
         const apiUrl = process.env.BASKETBALL_API_URL;
         const apiKey = process.env.BASKETBALL_API_KEY;
 
-        // 1-divisioona
-        const div1 = await axios.get(`${apiUrl}/getGroup`, {
+        console.log('Fetching div1...');
+        // MUUTOS: Käytä getCategory eikä getGroup
+        const div1 = await axios.get(`${apiUrl}/getCategory`, {
             params: {
                 api_key: apiKey,
                 competition_id: 'etekp2526',
-                category_id: '38751',
-                group_id: '302370'
+                category_id: '38751'
             }
         });
+        console.log('Div1 success');
 
-        // 2-divisioona
-        const div2 = await axios.get(`${apiUrl}/getGroup`, {
+        console.log('Fetching div2...');
+        const div2 = await axios.get(`${apiUrl}/getCategory`, {
             params: {
                 api_key: apiKey,
                 competition_id: 'etekp2526',
-                category_id: '38753',
-                group_id: '302369'
+                category_id: '38753'
             }
         });
+        console.log('Div2 success');
 
         res.json({
-            div1: div1.data.group,
-            div2: div2.data.group
+            div1: div1.data.category.groups[0], // Huom: data-rakenne erilainen
+            div2: div2.data.category.groups[0]
         });
     } catch (error) {
-        res.status(500).json({ error: error.message });
+        console.error('API Error:', error.response?.data || error.message);
+        res.status(500).json({ 
+            error: error.message,
+            details: error.response?.data 
+        });
     }
 });
 
