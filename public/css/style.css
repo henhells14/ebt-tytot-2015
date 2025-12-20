@@ -111,26 +111,6 @@ header {
 .basketball-nav:hover {
     transform: scale(1.1);
 }
-.pink-arrow {
-    color: #e91e63;
-    font-size: 2rem;
-    font-weight: bold;
-    margin: 0 0.5rem;
-    animation: pulse 2s infinite;
-}
-
-@keyframes pulse {
-    0%, 100% {
-        opacity: 1;
-        transform: translateX(0);
-    }
-    50% {
-        opacity: 0.6;
-        transform: translateX(5px);
-    }
-}
-
-
 
 /* Animaatio-luokat */
 .basketball-nav.nav-open {

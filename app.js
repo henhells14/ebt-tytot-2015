@@ -162,7 +162,7 @@ app.get('/api/tulevat-ottelut', async (req, res) => {
                     api_key: apiKey,
                     competition_id: 'etekp2526',
                     category_id: '38751',
-                    group_id: '302370',
+                    group_id: '302568',
                     team_id: EBT_TEAM_ID_DIV1
                 }
             }),
@@ -171,7 +171,7 @@ app.get('/api/tulevat-ottelut', async (req, res) => {
                     api_key: apiKey,
                     competition_id: 'etekp2526',
                     category_id: '38753',
-                    group_id: '302369',
+                    group_id: '302571',
                     team_id: EBT_TEAM_ID_DIV2
                 }
             })
