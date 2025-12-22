@@ -107,20 +107,22 @@ app.get('/api/ebt-ottelut', async (req, res) => {
         const d1Group = isAutumn ? SEASON_CONFIG.div1.group_id_prev : SEASON_CONFIG.div1.group_id_current;
         const d2Group = isAutumn ? SEASON_CONFIG.div2.group_id_prev : SEASON_CONFIG.div2.group_id_current;
 
-        const fetchMatches = (catId, groupId, teamId) => axios.get(`${process.env.BASKETBALL_API_URL}/getMatches`, {
-            params: {
-                api_key: process.env.BASKETBALL_API_KEY,
-                competition_id: SEASON_CONFIG.competition_id,
-                category_id: catId,
-                group_id: groupId,
-                team_id: teamId
-            }
-        });
+        // app.js - Etsi tämä kohta
+const fetchMatches = (catId, groupId) => axios.get(`${process.env.BASKETBALL_API_URL}/getMatches`, {
+    params: {
+        api_key: process.env.BASKETBALL_API_KEY,
+        competition_id: SEASON_CONFIG.competition_id,
+        category_id: catId,
+        group_id: groupId,
+        // POISTETTU: team_id: teamId  <-- TÄMÄ RIVI POIS
+    }
+});
 
-        const [div1Response, div2Response] = await Promise.all([
-            fetchMatches(SEASON_CONFIG.div1.category_id, d1Group, SEASON_CONFIG.div1.team_id),
-            fetchMatches(SEASON_CONFIG.div2.category_id, d2Group, SEASON_CONFIG.div2.team_id)
-        ]);
+const [div1Response, div2Response] = await Promise.all([
+    // Poistetaan kolmas parametri (teamId) kutsusta
+    fetchMatches(SEASON_CONFIG.div1.category_id, d1Group),
+    fetchMatches(SEASON_CONFIG.div2.category_id, d2Group)
+]);
 
         const filterPlayed = (matches) => matches ? matches.filter(match => match.status === 'Played') : [];
 

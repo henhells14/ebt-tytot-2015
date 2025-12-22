@@ -15,7 +15,6 @@ function vaihdaKausi(kausi, btnElement) {
     document.getElementById('ebtMatchesContent').innerHTML = '<p style="text-align: center; padding: 2rem;">Haetaan otteluita...</p>';
 
     // 3. Haetaan data valitulle kaudelle
-    // Jos kausi on 'syksy', lähetetään parametri. Muuten (kevät) ei lähetetä mitään (=oletus).
     const apiParams = kausi === 'syksy' ? '?kausi=syksy' : '';
     
     lataaSarjataulukot(apiParams);
@@ -26,7 +25,6 @@ async function lataaSarjataulukot(queryParams = '') {
     const container = document.getElementById('standingsContent');
     
     try {
-        // Lisätään queryParams hakuun (/api/sarjataulukko?kausi=syksy)
         const response = await fetch(`/api/sarjataulukko${queryParams}`);
         const data = await response.json();
         
@@ -94,19 +92,31 @@ async function lataaOttelut(queryParams = '') {
 
         let matchesHtml = `<h2 style="text-align: center; color: #F2059F; margin: 2rem 0;">Pelatut ottelut (${matchesData.season})</h2>`;
 
-        // Logiikka: Jos on dataa, näytä se.
+        // Koska API palauttaa nyt kaikki pelit, tarkistamme myöhemmin onko EBT:llä pelejä.
+        // Tässä vaiheessa vain välitetään data eteenpäin.
         const hasDiv1 = matchesData.div1 && matchesData.div1.length > 0;
         const hasDiv2 = matchesData.div2 && matchesData.div2.length > 0;
 
+        let contentGenerated = false;
+
         if (hasDiv1) {
-            matchesHtml += `<div class="matches-division"><h3>1. Divisioona</h3>${luoOtteluTaulukko(matchesData.div1)}</div>`;
+            // Luodaan taulukko ja katsotaan palauttaako se tyhjää vai oikeaa sisältöä
+            const tableHtml = luoOtteluTaulukko(matchesData.div1);
+            if (tableHtml.length > 0) {
+                matchesHtml += `<div class="matches-division"><h3>1. Divisioona</h3>${tableHtml}</div>`;
+                contentGenerated = true;
+            }
         }
 
         if (hasDiv2) {
-            matchesHtml += `<div class="matches-division"><h3>2. Divisioona</h3>${luoOtteluTaulukko(matchesData.div2)}</div>`;
+            const tableHtml = luoOtteluTaulukko(matchesData.div2);
+            if (tableHtml.length > 0) {
+                matchesHtml += `<div class="matches-division"><h3>2. Divisioona</h3>${tableHtml}</div>`;
+                contentGenerated = true;
+            }
         }
 
-        if (!hasDiv1 && !hasDiv2) {
+        if (!contentGenerated) {
             matchesHtml += '<p style="text-align: center; font-style: italic;">Ei pelattuja otteluita tällä kaudella.</p>';
         }
 
@@ -117,7 +127,20 @@ async function lataaOttelut(queryParams = '') {
     }
 }
 
+// --- TÄSSÄ ON KORJAUS ---
 function luoOtteluTaulukko(matches) {
+    // 1. SUODATUS: Otetaan vain pelit, joissa EBT on mukana (joko koti tai vieras)
+    const ebtMatches = matches.filter(match => 
+        match.team_A_name.includes('EBT') || match.team_B_name.includes('EBT')
+    );
+
+    // Jos EBT:llä ei ole pelejä tässä listassa, palautetaan tyhjä merkkijono
+    // (jolloin lataaOttelut osaa olla näyttämättä tyhjää otsikkoa)
+    if (ebtMatches.length === 0) return '';
+
+    // Järjestetään pelit uusin ensin (varmistus)
+    ebtMatches.sort((a, b) => new Date(b.date) - new Date(a.date));
+
     return `
         <table class="matches-table">
             <thead>
@@ -129,7 +152,7 @@ function luoOtteluTaulukko(matches) {
                 </tr>
             </thead>
             <tbody>
-                ${matches.map(match => {
+                ${ebtMatches.map(match => {
                     const isEbtHome = match.team_A_name.includes('EBT');
                     const pointsA = parseInt(match.fs_A);
                     const pointsB = parseInt(match.fs_B);

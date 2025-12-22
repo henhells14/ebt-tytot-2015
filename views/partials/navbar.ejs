@@ -1,30 +1,106 @@
 <header>
-        <div class="header-left">
+    <div class="header-left">
+        <a href="/" style="display: flex; align-items: center; text-decoration: none;">
             <div class="ebt-logo"></div>
             <span class="tytot-text">Tytöt 2015 →</span>
-            <div class="basketball-nav" onclick="toggleNav()">🏀</div>
-            
-            <!-- Desktop navigaatiovalikko -->
-            <div class="nav-menu">
-                <a href="/" class="nav-btn <%= page === 'koti' ? 'active' : '' %>">Koti</a>
-                <a href="/sarjataulukko" class="nav-btn <%= page === 'sarjataulukko' ? 'active' : '' %>">Sarjataulukko</a>
-                <a href="/ottelut" class="nav-btn <%= page === 'ottelut' ? 'active' : '' %>">Ottelut</a>
-                <a href="/pelaajat" class="nav-btn <%= page === 'pelaajat' ? 'active' : '' %>">Pelaajat</a>
-            </div>
-        </div>
+        </a>
+
+        <div class="basketball-nav" onclick="toggleNav()">🏀</div>
         
-        <!-- Mobile hamburger menu -->
-        <div class="mobile-nav">
-            <div class="hamburger">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-            <div class="mobile-menu">
-                <a href="/" class="<%= page === 'koti' ? 'active' : '' %>">Koti</a>
-                <a href="/sarjataulukko" class="<%= page === 'sarjataulukko' ? 'active' : '' %>">Sarjataulukko</a>
-                <a href="/ottelut" class="<%= page === 'ottelut' ? 'active' : '' %>">Ottelut</a>
-                <a href="/pelaajat" class="<%= page === 'pelaajat' ? 'active' : '' %>">Pelaajat</a>
-            </div>
+        <div class="nav-menu">
+            <a href="/" class="nav-btn <%= page === 'koti' ? 'active' : '' %>">Koti</a>
+            <a href="/sarjataulukko" class="nav-btn <%= page === 'sarjataulukko' ? 'active' : '' %>">Sarjataulukko</a>
+            <a href="/ottelut" class="nav-btn <%= page === 'ottelut' ? 'active' : '' %>">Ottelut</a>
+            <a href="/pelaajat" class="nav-btn <%= page === 'pelaajat' ? 'active' : '' %>">Pelaajat</a>
         </div>
-    </header>
+    </div>
+    
+    <div class="mobile-nav">
+        <div class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <div class="mobile-menu">
+            <a href="/" class="<%= page === 'koti' ? 'active' : '' %>">Koti</a>
+            <a href="/sarjataulukko" class="<%= page === 'sarjataulukko' ? 'active' : '' %>">Sarjataulukko</a>
+            <a href="/ottelut" class="<%= page === 'ottelut' ? 'active' : '' %>">Ottelut</a>
+            <a href="/pelaajat" class="<%= page === 'pelaajat' ? 'active' : '' %>">Pelaajat</a>
+        </div>
+    </div>
+</header>
+
+<script>
+    // --- DESKTOP NAVIGAATIO (Pallo pyörii) ---
+    let navOpen = false;
+
+    function toggleNav() {
+        const basketball = document.querySelector('.basketball-nav');
+        const navMenu = document.querySelector('.nav-menu');
+        
+        // Lasketaan dynaamisesti kuinka leveä valikko on, jotta pallo vierii juuri oikean verran
+        // Jos valikon leveys on esim 500px, lisätään vähän marginaalia (esim +70px)
+        const menuWidth = navMenu.offsetWidth || 500; 
+        const rollDistance = menuWidth + 100; 
+
+        if (!navOpen) {
+            // Avaa: Pallo vierii oikealle ja pyörii
+            basketball.style.transform = `translateX(${rollDistance}px) rotate(360deg)`;
+            navMenu.classList.add('show');
+            navOpen = true;
+        } else {
+            // Sulje: Pallo palaa takaisin
+            basketball.style.transform = 'translateX(0) rotate(0deg)';
+            navMenu.classList.remove('show');
+            navOpen = false;
+        }
+    }
+
+    // --- MOBILE NAVIGAATIO (Hamburger) ---
+    let mobileNavOpen = false;
+
+    function toggleMobileNav() {
+        const hamburger = document.querySelector('.hamburger');
+        const mobileMenu = document.querySelector('.mobile-menu');
+        
+        if (hamburger && mobileMenu) {
+            if (!mobileNavOpen) {
+                hamburger.classList.add('open'); // Muuttaa viivat ruksiksi (CSS)
+                mobileMenu.classList.add('show'); // Tuo valikon esiin
+                mobileNavOpen = true;
+            } else {
+                hamburger.classList.remove('open');
+                mobileMenu.classList.remove('show');
+                mobileNavOpen = false;
+            }
+        }
+    }
+
+    // --- EVENT LISTENERIT ---
+    document.addEventListener('DOMContentLoaded', function() {
+        // Liitetään klikkauskuuntelija hamburgeriin
+        const hamburger = document.querySelector('.hamburger');
+        if (hamburger) {
+            hamburger.addEventListener('click', toggleMobileNav);
+        }
+    });
+
+    // Sulje navigaatio jos klikataan valikon ohi
+    document.addEventListener('click', function(e) {
+        // Desktopin sulkeminen
+        const headerLeft = document.querySelector('.header-left');
+        const basketball = document.querySelector('.basketball-nav');
+        
+        // Jos klikkaus ei osunut header-alueeseen JA valikko on auki -> sulje se
+        if (navOpen && headerLeft && !headerLeft.contains(e.target)) {
+            toggleNav();
+        }
+
+        // Mobiilin sulkeminen
+        const mobileNav = document.querySelector('.mobile-nav');
+        // Jos klikkaus ei osunut mobiilivalikkoon JA se on auki -> sulje se
+        if (mobileNavOpen && mobileNav && !mobileNav.contains(e.target)) {
+            toggleMobileNav();
+        }
+    });
+</script>
