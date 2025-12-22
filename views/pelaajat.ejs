@@ -1,41 +1,67 @@
 <%- include('partials/header') %>
 <%- include('partials/navbar') %>
 
-<main>
- 
+<main class="players-page">
 
-  <!-- Pelaajagalleria -->
   <div class="players-grid">
-
-     <!-- Otsikko gridin sisällä -->
     <div style="grid-column: 1 / -1; text-align: center; margin-bottom: 2rem;">
-      <h1>Pelaajat kaudella 2025-26 EBT Tytöt 2015</h1>
+      <h1>Pelaajat kaudella 2025-26</h1>
     </div>
 
     <% players.forEach(player => { %>
-      <div class="player-card" onclick="openModal(<%= player.id %>)">
-        <img src="/images/players/<%= player.image %>" alt="<%= player.name %>">
-        <h3><%= player.name %></h3>
+      <div class="player-card" onclick="openModal('<%= player.id %>')">
+        <img src="/images/players/<%= player.image %>" alt="<%= player.name %>" loading="lazy">
+        <h3>
+            <% if (player.number) { %>
+                <span class="player-number">#<%= player.number %></span>
+            <% } %>
+            <%= player.name %>
+        </h3>
       </div>
     <% }) %>
   </div>
 
-  <!-- Modal -->
+  <% if (coaches && coaches.length > 0) { %>
+      <div class="players-grid coaches-section" style="margin-top: 4rem; border-top: 2px solid #eee; padding-top: 2rem;">
+        <div style="grid-column: 1 / -1; text-align: center; margin-bottom: 2rem;">
+          <h2 style="color: #e91e63;">Valmennus & Staff</h2>
+        </div>
+
+        <% coaches.forEach(coach => { %>
+          <div class="player-card coach-card" onclick="openModal('<%= coach.id %>')">
+            <img src="/images/coaches/<%= coach.image || 'default-coach.png' %>" alt="<%= coach.name %>" loading="lazy">
+            <div class="card-info">
+                <h3><%= coach.name %></h3>
+                <p style="color: #e91e63; font-size: 0.9rem; margin-top: 5px;"><%= coach.role %></p>
+            </div>
+          </div>
+        <% }) %>
+      </div>
+  <% } %>
+
   <div id="playerModal" class="modal">
     <div class="modal-overlay" onclick="closeModal()"></div>
     <div class="modal-content">
       <button class="modal-close" onclick="closeModal()">&times;</button>
+      
       <div class="modal-body">
-        <img id="modalImage" src="" alt="">
+        <div class="modal-image-wrapper">
+             <img id="modalImage" src="" alt="">
+        </div>
+        
         <div class="modal-info">
           <h2 id="modalName"></h2>
-          <p id="modalBirthdate"></p>
-          <p id="modalPosition"></p>
-          <div class="modal-motto">
+          
+          <p id="modalDetail1" class="modal-subtitle"></p> 
+          
+          <p id="modalDetail2" class="modal-subtitle" style="font-size: 0.9em; color: #666;"></p>
+
+          <div class="modal-text-block" id="mottoBlock">
             <strong>Motto:</strong>
             <p id="modalMotto"></p>
           </div>
-          <div class="modal-about">
+          
+          <div class="modal-text-block" id="aboutBlock">
             <strong>Mitä sanot EBT T-15 joukkueesta?</strong>
             <p id="modalAbout"></p>
           </div>
@@ -47,8 +73,13 @@
 
 <%- include('partials/footer') %>
 
-<!-- Pelaajadata JavaScript:lle -->
 <script>
-  const playersData = <%- JSON.stringify(players) %>;
+  // Otetaan data backendistä
+  const playersList = <%- JSON.stringify(players || []) %>;
+  const coachesList = <%- JSON.stringify(coaches || []) %>;
+  
+  // Yhdistetään ne yhdeksi isoksi listaksi, josta "openModal" voi hakea tiedot
+  const allPeopleData = [...playersList, ...coachesList];
 </script>
+
 <script src="/js/players.js"></script>

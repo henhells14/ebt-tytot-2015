@@ -1,0 +1,34 @@
+[
+  {
+    "id": 100,
+    "name": "Niko Hellman",
+    "role": "Päävalmentaja",
+    "image": "niko.jpg",
+    "motto": "Asenne ratkaisee aina.",
+    "about": "Valmentaminen on intohimoni. Haluan nähdä pelaajien kehittyvän ja nauttivan lajista."
+  },
+  {
+    "id": 101,
+    "name": "Sara Lanteri",
+    "role": "Apuvalmentaja",
+    "image": "sara.jpg",
+    "motto": "Yhdessä olemme enemmän.",
+    "about": "Koripallo on joukkuelaji parhaimmillaan."
+  },
+  {
+    "id": 102,
+    "name": "Alli Niinistö",
+    "role": "Apuvalmentaja",
+    "image": "alli.jpg",
+    "motto": "Pienet asiat ratkaisevat.",
+    "about": "Tsemppaan tyttöjä parhaaseen suoritukseen."
+  },
+  {
+    "id": 103,
+    "name": "Sanni Nelskylä",
+    "role": "Apuvalmentaja",
+    "image": "sanni-valkku.jpg",
+    "motto": "Hyvä fiilis tuo hyviä tuloksia.",
+    "about": "Huolehdin että homma toimii kentällä ja sen ulkopuolella."
+  }
+]

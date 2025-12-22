@@ -1,6 +1,7 @@
 [
   {
     "id": 1,
+    "number": 39,
     "name": "Helvi",
     "birthdate": "12.7.2015",
     "position": "Pelintekijä",
@@ -10,7 +11,8 @@
   },
   {
     "id": 2,
-    "name": "Isabella",
+    "number": 29,
+    "name": "Isabelle",
     "birthdate": "1.1.2015",
     "position": "Pelintekijä",
     "motto": "Älä koskaan luovuta – jokainen pallo on mahdollisuus.",
@@ -19,6 +21,7 @@
   },
   {
     "id": 3,
+    "number": 43,
     "name": "Evi",
     "birthdate": "15.10.2015",
     "position": "Sentteri",
@@ -28,6 +31,7 @@
   },
   {
     "id": 4,
+    "number": 16,
     "name": "Molly",
     "birthdate": "1.1.2015",
     "position": "Pieni laitahyökkääjä",
@@ -37,6 +41,7 @@
   },
   {
     "id": 5,
+    "number": 4,
     "name": "Lotta",
     "birthdate": "1.1.2015",
     "position": "Sentteri",
@@ -46,6 +51,7 @@
   },
   {
     "id": 6,
+    "number": 40,
     "name": "Cessi",
     "birthdate": "11.10.2015",
     "position": "Heittävä takamies",
@@ -55,6 +61,7 @@
   },
   {
     "id": 7,
+    "number": 57,
     "name": "Aili",
     "birthdate": "1.1.2016",
     "position": "Pieni laitahyökkääjä",
@@ -64,6 +71,7 @@
   },
   {
     "id": 8,
+    "number": 33,
     "name": "Adele",
     "birthdate": "1.1.2015",
     "position": "Iso laitahyökkääjä",
@@ -73,6 +81,7 @@
   },
   {
     "id": 9,
+    "number": 14,
     "name": "Ellen",
     "birthdate": "1.1.2015",
     "position": "Iso laitahyökkääjä",
@@ -82,7 +91,8 @@
   },
   {
     "id": 10,
-    "name": "Kristina",
+    "number": 58,
+    "name": "Kristiina",
     "birthdate": "1.1.2015",
     "position": "Pelintekijä",
     "motto": "Anna kentällä kaikkesi – jätä kaikki peliin.",
@@ -91,6 +101,7 @@
   },
   {
     "id": 11,
+    "number": 22,
     "name": "Lilli",
     "birthdate": "1.1.2015",
     "position": "Heittävä takatyttö",
@@ -100,6 +111,7 @@
   },
   {
     "id": 12,
+    "number": 24,
     "name": "Sanni",
     "birthdate": "1.1.2015",
     "position": "Sentteri",
@@ -109,6 +121,7 @@
   },
   {
     "id": 13,
+    "number": 15,
     "name": "Stella",
     "birthdate": "1.1.2015",
     "position": "Heittävä takatyttö",
@@ -118,6 +131,7 @@
   },
   {
     "id": 14,
+    "number": 30,
     "name": "Linnea",
     "birthdate": "1.1.2015",
     "position": "Pieni laitahyökkääjä",
@@ -127,6 +141,7 @@
   },
   {
     "id": 15,
+    "number": 75,
     "name": "Tuana",
     "birthdate": "1.1.2015",
     "position": "Pieni laitahyökkääjä",
@@ -136,6 +151,7 @@
   },
   {
     "id": 16,
+    "number": 34,
     "name": "Saga",
     "birthdate": "1.1.2015",
     "position": "Iso laitahyökkääjä",
@@ -145,6 +161,7 @@
   },
   {
     "id": 17,
+    "number": 31,
     "name": "Viola",
     "birthdate": "1.1.2015",
     "position": "Sentteri",
@@ -154,6 +171,7 @@
   },
   {
     "id": 18,
+    "number": 18,
     "name": "Stella",
     "birthdate": "1.1.2015",
     "position": "Pieni laitahyökkääjä",
@@ -163,6 +181,7 @@
   },
   {
     "id": 19,
+    "number": 25,
     "name": "Emelie",
     "birthdate": "1.1.2015",
     "position": "Heittävä takatyttö",
