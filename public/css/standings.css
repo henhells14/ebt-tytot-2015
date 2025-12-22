@@ -204,19 +204,61 @@
     border-left: 4px solid #e91e63;
 }
 
-/* Voitot ja tappiot */
+/* =========================================
+   Voitot ja tappiot - HAALEA RIVIVÄRITYS
+   ========================================= */
+
+/* =========================================
+   Voitot ja tappiot - VAIN TULOS-SOLU (HAALEA)
+   ========================================= */
+
+/* Nollataan rivin taustaväri, jotta se on valkoinen/läpinäkyvä */
+.matches-table tr.win,
+.matches-table tr.loss {
+    background-color: transparent;
+    color: #333;
+}
+
+/* --- VOITTO (Vain tulos-solu) --- */
 .matches-table tr.win td.score {
-    color: #2e7d32;
-    background-color: rgba(76, 175, 80, 0.1);
-    border-radius: 4px;
+    background-color: #e8f5e9; /* Todella haalea vihreä */
+    color: #2e7d32;            /* Tummempi vihreä teksti jotta erottuu */
+    font-weight: bold;
+    border-radius: 6px;        /* Pyöristetyt kulmat näyttävät kivalta */
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1); /* Pieni varjo */
+    
+    /* Varmistetaan että väri ei leviä reunoihin asti jos solussa on paddingia */
+    display: inline-block; 
+    padding: 5px 15px;
+    margin: 5px 0;
+    min-width: 80px; /* Vakiokoko laatikoille */
 }
 
+/* --- TAPPIO (Vain tulos-solu) --- */
 .matches-table tr.loss td.score {
-    color: #c62828;
-    background-color: rgba(244, 67, 54, 0.1);
-    border-radius: 4px;
+    background-color: #ffebee; /* Todella haalea punainen */
+    color: #c62828;            /* Tummempi punainen teksti */
+    font-weight: bold;
+    border-radius: 6px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    
+    display: inline-block;
+    padding: 5px 15px;
+    margin: 5px 0;
+    min-width: 80px;
 }
 
+/* EBT Teksti pidetään pinkkinä */
+.matches-table tr.win .ebt-team,
+.matches-table tr.loss .ebt-team {
+    color: #e91e63;
+    font-weight: bold;
+}
+
+/* Hover-efekti riville (vapaaehtoinen, helpottaa rivin seuraamista) */
+.matches-table tr:hover {
+    background-color: #fafafa;
+}
 /* =========================================
    Responsiivisuus (Mobile)
    ========================================= */

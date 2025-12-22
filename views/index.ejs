@@ -1,23 +1,56 @@
 <%- include('partials/header') %>
 <%- include('partials/navbar') %>
 
-<!-- Koripallo logo oikeaan laitaan -->
-
-
 <main class="landing-page">
+    
     <div class="hero-section">
-        <div class="team-photo">
-            <img src="/images/team-photo.jpg" alt="EBT Tytöt 2015 joukkuekuva" />
-        </div>
+        
         <div class="welcome-text">
             <h1>Tervetuloa iloiseen joukkoomme!</h1>
-            <p>Pelaamme 2015 syntyneiden tyttöjen sarjoja 1. ja 2. divisioonassa.</p>
+            <p>EBT Tytöt 2015 - Energiaa, iloa ja koripalloa.</p>
             <div class="cta-buttons">
-                <a href="/sarjataulukko" class="btn btn-primary">Katso sarjataulukko</a>
-                <a href="/pelaajat" class="btn btn-secondary">Tutustu pelaajiin</a>
+                <a href="/sarjataulukko" class="btn btn-primary">Sarjataulukko</a>
+                <a href="/pelaajat" class="btn btn-secondary">Joukkue</a>
+            </div>
+        </div>
+
+        <div class="hero-image-container">
+            <img src="/images/team-photo.jpg" alt="EBT Tytöt 2015" class="team-img" />
+        </div>
+
+    </div>
+
+    <div class="next-matches-section" id="nextMatchesContainer">
+        <div style="grid-column: 1/-1; text-align: center;">
+            <p>Ladataan seuraavia otteluita...</p>
+        </div>
+    </div>
+
+    <div id="matchModal" class="modal">
+        <div class="modal-overlay" onclick="closeMatchModal()"></div>
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeMatchModal()">&times;</button>
+            <div class="modal-body">
+                <h2 id="modalMatchTitle" style="text-align: center; color: #e91e63;"></h2>
+                <p id="modalMatchDate" style="text-align: center; margin-bottom: 20px; color: #666;"></p>
+
+                <div class="stats-container">
+                    <h3 style="font-size: 1rem; border-bottom: 2px solid #ddd; padding-bottom: 5px;">EBT Kuntopuntari (5 edellistä)</h3>
+                    <div class="form-guide" id="modalFormGuide">
+                        </div>
+                </div>
+
+                <div class="stats-container">
+                    <h3 style="font-size: 1rem; border-bottom: 2px solid #ddd; padding-bottom: 5px;">Edelliset kohtaamiset</h3>
+                    <div id="modalHeadToHead">
+                        </div>
+                </div>
             </div>
         </div>
     </div>
+
 </main>
+
+<script src="/js/home.js"></script>
 
 <%- include('partials/footer') %>
