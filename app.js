@@ -8,24 +8,31 @@ const port = process.env.PORT || 3000;
 const playersRouter = require('./routes/players');
 
 // ============ CONFIGURATION ============
-// Päivitä nämä tiedot kauden vaihtuessa!
 const SEASON_CONFIG = {
     competition_id: 'etekp2526',
-    // 1. Divisioona asetukset
+    
+    // 1. Divisioona
     div1: {
         category_id: '38751',
-        team_id: '5753845',     // EBT T09/10
-        group_id_played: '302370', // Syksy/Pelatut (tarkista ID)
-        group_id_upcoming: '302568', // Kevät/Tulevat
-        group_index: 0          // 0 = Syksy, 1 = Kevät (sarjataulukkoa varten)
+        team_id: '5753845',
+        // KEVÄT (Current)
+        group_id_current: '302568', 
+        group_index_current: 1,     // Kevät on listan toinen (index 1)
+        // SYKSY (Previous)
+        group_id_prev: '302370',
+        group_index_prev: 0         // Syksy on listan ensimmäinen (index 0)
     },
-    // 2. Divisioona asetukset
+    
+    // 2. Divisioona
     div2: {
         category_id: '38753',
-        team_id: '5753846',     // EBT White
-        group_id_played: '302369', // Syksy/Pelatut
-        group_id_upcoming: '302571', // Kevät/Tulevat
-        group_index: 0          // 0 = Syksy, 1 = Kevät
+        team_id: '5753846',
+        // KEVÄT (Current)
+        group_id_current: '302571',
+        group_index_current: 1,
+        // SYKSY (Previous)
+        group_id_prev: '302369',
+        group_index_prev: 0
     }
 };
 
@@ -59,9 +66,13 @@ app.use('/pelaajat', playersRouter);
 // API endpoint sarjataulukoille
 app.get('/api/sarjataulukko', async (req, res) => {
     try {
-        const { api_key } = process.env.BASKETBALL_API_KEY ? { api_key: process.env.BASKETBALL_API_KEY } : { api_key: '' }; // Fallback jos puuttuu
-        
-        // Helper function API-kutsuille
+        // Katsotaan pyytääkö frontend syksyä (?kausi=syksy)
+        const isAutumn = req.query.kausi === 'syksy';
+
+        // Valitaan oikeat indeksit kauden mukaan
+        const d1Index = isAutumn ? SEASON_CONFIG.div1.group_index_prev : SEASON_CONFIG.div1.group_index_current;
+        const d2Index = isAutumn ? SEASON_CONFIG.div2.group_index_prev : SEASON_CONFIG.div2.group_index_current;
+
         const fetchCategory = (catId) => axios.get(`${process.env.BASKETBALL_API_URL}/getCategory`, {
             params: {
                 api_key: process.env.BASKETBALL_API_KEY,
@@ -75,10 +86,10 @@ app.get('/api/sarjataulukko', async (req, res) => {
             fetchCategory(SEASON_CONFIG.div2.category_id)
         ]);
 
-        // Optional chaining (?.) estää kaatumisen jos groups on undefined
         res.json({
-            div1: div1Res.data.category?.groups?.[SEASON_CONFIG.div1.group_index] || null,
-            div2: div2Res.data.category?.groups?.[SEASON_CONFIG.div2.group_index] || null
+            div1: div1Res.data.category?.groups?.[d1Index] || null,
+            div2: div2Res.data.category?.groups?.[d2Index] || null,
+            season: isAutumn ? 'Syksy 2025' : 'Kevät 2026'
         });
 
     } catch (error) {
@@ -87,9 +98,15 @@ app.get('/api/sarjataulukko', async (req, res) => {
     }
 });
 
-// API endpoint EBT:n pelatuille otteluille
+// API endpoint pelatuille otteluille
 app.get('/api/ebt-ottelut', async (req, res) => {
     try {
+        const isAutumn = req.query.kausi === 'syksy';
+
+        // Valitaan oikeat Group ID:t kauden mukaan
+        const d1Group = isAutumn ? SEASON_CONFIG.div1.group_id_prev : SEASON_CONFIG.div1.group_id_current;
+        const d2Group = isAutumn ? SEASON_CONFIG.div2.group_id_prev : SEASON_CONFIG.div2.group_id_current;
+
         const fetchMatches = (catId, groupId, teamId) => axios.get(`${process.env.BASKETBALL_API_URL}/getMatches`, {
             params: {
                 api_key: process.env.BASKETBALL_API_KEY,
@@ -101,15 +118,16 @@ app.get('/api/ebt-ottelut', async (req, res) => {
         });
 
         const [div1Response, div2Response] = await Promise.all([
-            fetchMatches(SEASON_CONFIG.div1.category_id, SEASON_CONFIG.div1.group_id_played, SEASON_CONFIG.div1.team_id),
-            fetchMatches(SEASON_CONFIG.div2.category_id, SEASON_CONFIG.div2.group_id_played, SEASON_CONFIG.div2.team_id)
+            fetchMatches(SEASON_CONFIG.div1.category_id, d1Group, SEASON_CONFIG.div1.team_id),
+            fetchMatches(SEASON_CONFIG.div2.category_id, d2Group, SEASON_CONFIG.div2.team_id)
         ]);
 
         const filterPlayed = (matches) => matches ? matches.filter(match => match.status === 'Played') : [];
 
         res.json({
             div1: filterPlayed(div1Response.data.matches),
-            div2: filterPlayed(div2Response.data.matches)
+            div2: filterPlayed(div2Response.data.matches),
+            season: isAutumn ? 'Syksy 2025' : 'Kevät 2026'
         });
     } catch (error) {
         console.error('API Error (pelatut):', error.message);

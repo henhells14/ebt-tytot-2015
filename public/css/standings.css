@@ -40,7 +40,27 @@
     margin-bottom: 2rem;
     line-height: 1.8;
 }
+/* Lisää standings.css tiedostoon */
+.season-btn {
+    background: transparent;
+    border: 2px solid #e91e63;
+    color: white; /* Tai musta riippuen taustasta */
+    padding: 10px 20px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: bold;
+    margin-right: 10px;
+    transition: all 0.3s ease;
+}
 
+.season-btn:hover {
+    background: rgba(233, 30, 99, 0.2);
+}
+
+.season-btn.active {
+    background: #e91e63;
+    color: white;
+}
 /* =========================================
    Sarjataulukot (Standings)
    ========================================= */

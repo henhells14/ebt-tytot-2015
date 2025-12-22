@@ -1,40 +1,58 @@
-// public/js/sarjataulukko.js
-
 document.addEventListener('DOMContentLoaded', function() {
-    lataaSarjataulukot();
+    // Ladataan oletuksena Kevät (ilman parametreja)
+    lataaSarjataulukot(); 
     lataaOttelut();
 });
 
-// Funktio sarjataulukoiden hakemiseen ja piirtämiseen
-async function lataaSarjataulukot() {
+// Tämä funktio kutsutaan napeista
+function vaihdaKausi(kausi, btnElement) {
+    // 1. Päivitetään nappien ulkonäkö
+    document.querySelectorAll('.season-btn').forEach(btn => btn.classList.remove('active'));
+    btnElement.classList.add('active');
+
+    // 2. Tyhjennetään nykyiset näkymät latauksen ajaksi
+    document.getElementById('standingsContent').innerHTML = '<div class="loader-container" style="text-align: center; padding: 3rem;"><p>Ladataan tietoja...</p></div>';
+    document.getElementById('ebtMatchesContent').innerHTML = '<p style="text-align: center; padding: 2rem;">Haetaan otteluita...</p>';
+
+    // 3. Haetaan data valitulle kaudelle
+    // Jos kausi on 'syksy', lähetetään parametri. Muuten (kevät) ei lähetetä mitään (=oletus).
+    const apiParams = kausi === 'syksy' ? '?kausi=syksy' : '';
+    
+    lataaSarjataulukot(apiParams);
+    lataaOttelut(apiParams);
+}
+
+async function lataaSarjataulukot(queryParams = '') {
     const container = document.getElementById('standingsContent');
     
     try {
-        const response = await fetch('/api/sarjataulukko');
+        // Lisätään queryParams hakuun (/api/sarjataulukko?kausi=syksy)
+        const response = await fetch(`/api/sarjataulukko${queryParams}`);
         const data = await response.json();
         
-        // Rakennetaan HTML
         const html = `
+            <div style="grid-column: 1/-1; text-align: center; margin-bottom: 1rem; color: #666;">
+                <em>Näytetään tiedot: ${data.season}</em>
+            </div>
             <div class="division">
                 <h2>1. Divisioona</h2>
-                ${luoTaulukkoHTML(data.div1.teams)}
+                ${luoTaulukkoHTML(data.div1 ? data.div1.teams : null)}
             </div>
             <div class="division">
                 <h2>2. Divisioona</h2>
-                ${luoTaulukkoHTML(data.div2.teams)}
+                ${luoTaulukkoHTML(data.div2 ? data.div2.teams : null)}
             </div>
         `;
         
         container.innerHTML = html;
     } catch (error) {
-        console.error('Virhe sarjataulukoiden lataamisessa:', error);
-        container.innerHTML = '<p style="color: red; text-align: center;">Virhe sarjataulukoiden lataamisessa. Yritä myöhemmin uudelleen.</p>';
+        console.error('Virhe:', error);
+        container.innerHTML = '<p style="color: red; text-align: center;">Tietoja ei saatavilla.</p>';
     }
 }
 
-// Apufunktio taulukon rivien luomiseen (vähentää toistoa)
 function luoTaulukkoHTML(teams) {
-    if (!teams) return '<p>Tietoja ei saatavilla</p>';
+    if (!teams || teams.length === 0) return '<p style="padding:1rem; text-align:center;">Sarjataulukkoa ei vielä saatavilla / Kausi ei alkanut.</p>';
 
     return `
         <table class="standings-table">
@@ -53,7 +71,7 @@ function luoTaulukkoHTML(teams) {
                     <tr class="${team.team_name.includes('EBT') ? 'ebt-row' : ''}">
                         <td>${index + 1}</td>
                         <td class="team-cell">
-                            <img src="${team.crest}" alt="${team.team_name}" class="team-logo">
+                            <img src="${team.crest}" alt="" class="team-logo">
                             <span>${team.team_name}</span>
                         </td>
                         <td>${team.matches_played}</td>
@@ -67,48 +85,38 @@ function luoTaulukkoHTML(teams) {
     `;
 }
 
-// Funktio otteluiden hakemiseen ja piirtämiseen
-async function lataaOttelut() {
+async function lataaOttelut(queryParams = '') {
     const container = document.getElementById('ebtMatchesContent');
 
     try {
-        const matchesResponse = await fetch('/api/ebt-ottelut');
+        const matchesResponse = await fetch(`/api/ebt-ottelut${queryParams}`);
         const matchesData = await matchesResponse.json();
 
-        let matchesHtml = '<h2 style="text-align: center; color: #F2059F; margin: 2rem 0;">EBT T-15 pelatut ottelut</h2>';
+        let matchesHtml = `<h2 style="text-align: center; color: #F2059F; margin: 2rem 0;">Pelatut ottelut (${matchesData.season})</h2>`;
 
-        // 1. Divisioona
-        if (matchesData.div1 && matchesData.div1.length > 0) {
-            matchesHtml += `
-                <div class="matches-division">
-                    <h3>1. Divisioona</h3>
-                    ${luoOtteluTaulukko(matchesData.div1)}
-                </div>
-            `;
+        // Logiikka: Jos on dataa, näytä se.
+        const hasDiv1 = matchesData.div1 && matchesData.div1.length > 0;
+        const hasDiv2 = matchesData.div2 && matchesData.div2.length > 0;
+
+        if (hasDiv1) {
+            matchesHtml += `<div class="matches-division"><h3>1. Divisioona</h3>${luoOtteluTaulukko(matchesData.div1)}</div>`;
         }
 
-        // 2. Divisioona
-        if (matchesData.div2 && matchesData.div2.length > 0) {
-            matchesHtml += `
-                <div class="matches-division">
-                    <h3>2. Divisioona</h3>
-                    ${luoOtteluTaulukko(matchesData.div2)}
-                </div>
-            `;
+        if (hasDiv2) {
+            matchesHtml += `<div class="matches-division"><h3>2. Divisioona</h3>${luoOtteluTaulukko(matchesData.div2)}</div>`;
         }
 
-        if ((!matchesData.div1 || matchesData.div1.length === 0) && (!matchesData.div2 || matchesData.div2.length === 0)) {
-            matchesHtml += '<p style="text-align: center;">Ei pelattuja otteluita tällä kaudella.</p>';
+        if (!hasDiv1 && !hasDiv2) {
+            matchesHtml += '<p style="text-align: center; font-style: italic;">Ei pelattuja otteluita tällä kaudella.</p>';
         }
 
         container.innerHTML = matchesHtml;
     } catch (error) {
-        console.error('Virhe otteluiden lataamisessa:', error);
-        container.innerHTML = '<p style="color: red; text-align: center;">Virhe otteluiden lataamisessa.</p>';
+        console.error('Virhe otteluissa:', error);
+        container.innerHTML = '<p style="color: red; text-align: center;">Virhe tietojen latauksessa.</p>';
     }
 }
 
-// Apufunktio ottelutaulukon luomiseen
 function luoOtteluTaulukko(matches) {
     return `
         <table class="matches-table">
@@ -123,13 +131,9 @@ function luoOtteluTaulukko(matches) {
             <tbody>
                 ${matches.map(match => {
                     const isEbtHome = match.team_A_name.includes('EBT');
-                    // Tarkistetaan voittaja pisteiden perusteella
                     const pointsA = parseInt(match.fs_A);
                     const pointsB = parseInt(match.fs_B);
-                    
-                    let isWin = false;
-                    if (isEbtHome && pointsA > pointsB) isWin = true;
-                    if (!isEbtHome && pointsB > pointsA) isWin = true;
+                    let isWin = (isEbtHome && pointsA > pointsB) || (!isEbtHome && pointsB > pointsA);
                     
                     return `
                         <tr class="${isWin ? 'win' : 'loss'}">
