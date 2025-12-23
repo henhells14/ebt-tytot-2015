@@ -14,7 +14,7 @@
     "number": 29,
     "name": "Isabelle",
     "birthdate": "1.1.2015",
-    "position": "Pelintekijä",
+    "position": "",
     "motto": "Älä koskaan luovuta – jokainen pallo on mahdollisuus.",
     "about": "Täällä on hyvä fiilis, kaikki treenaa tosissaan mutta pidetään myös hauskaa. Niko osaa tsemppaa meitä!",
     "image": "isabella.jpg"
@@ -24,7 +24,7 @@
     "number": 43,
     "name": "Evi",
     "birthdate": "15.10.2015",
-    "position": "Sentteri",
+    "position": "",
     "motto": "Tee töitä hiljaa ja anna tulosten puhua.",
     "about": "EBT on kuin toinen perhe. Meillä on hyvä yhteishenki ja valmentajat ovat huippuja!",
     "image": "evi2.jpg"
@@ -34,7 +34,7 @@
     "number": 16,
     "name": "Molly",
     "birthdate": "1.1.2015",
-    "position": "Pieni laitahyökkääjä",
+    "position": "",
     "motto": "Taistele loppuun asti – vaikka happi loppuu!",
     "about": "Tosi mukava porukka ja paljon kavereita. Niko saa meistä aina parhaan irti.",
     "image": "molly2.jpg"
@@ -44,7 +44,7 @@
     "number": 4,
     "name": "Lotta",
     "birthdate": "1.1.2015",
-    "position": "Sentteri",
+    "position": "",
     "motto": "Jokainen pallo on voitettava – yksi kerrallaan.",
     "about": "Meillä on hyvä joukkuehenki ja paljon energiaa treeneissä. Niko, Sara, Alli ja Sanni ovat ihan parhaita.",
     "image": "lotta.jpg"
@@ -53,8 +53,8 @@
     "id": 6,
     "number": 40,
     "name": "Cessi",
-    "birthdate": "11.10.2015",
-    "position": "Heittävä takamies",
+    "birthdate": "10.10.2015",
+    "position": "",
     "motto": "Kentällä ei anneta periksi, koskaan.",
     "about": "Täällä on kivaa treenata ja pelata. Kaikki kannustavat toisiaan, ja valmentajat ovat kivoja",
     "image": "cessi2.jpg"
@@ -64,7 +64,7 @@
     "number": 57,
     "name": "Aili",
     "birthdate": "1.1.2016",
-    "position": "Pieni laitahyökkääjä",
+    "position": "",
     "motto": "Pelaa sydämellä – voita joukkueelle.",
     "about": "Hyvä meininki ja loistava tiimi! Tykkään treenata täällä kavereiden kanssa.",
     "image": "aili.jpg"
@@ -74,7 +74,7 @@
     "number": 33,
     "name": "Adele",
     "birthdate": "1.1.2015",
-    "position": "Iso laitahyökkääjä",
+    "position": "",
     "motto": "Keskity peliin, usko itseesi ja tee parhaasi.",
     "about": "Meillä on mahtava joukkue, jossa kaikki tukevat toisiaan. Niko tekee treeneistä aina mielenkiintoisia.",
     "image": "adele.jpg"
@@ -84,7 +84,7 @@
     "number": 14,
     "name": "Ellen",
     "birthdate": "1.1.2015",
-    "position": "Iso laitahyökkääjä",
+    "position": "",
     "motto": "Voitto syntyy taistelusta, ei tuurista.",
     "about": "Täällä on aina hauskaa ja kaikilla on hyvä asenne. Niko on motivoiva valmentaja.",
     "image": "ellen.jpg"
@@ -94,7 +94,7 @@
     "number": 58,
     "name": "Kristiina",
     "birthdate": "1.1.2015",
-    "position": "Pelintekijä",
+    "position": "",
     "motto": "Anna kentällä kaikkesi – jätä kaikki peliin.",
     "about": "EBT:ssä on kiva pelata, kaikki yrittävät parhaansa. Niko on meidän tuki ja turva.",
     "image": "kristina.jpg"
@@ -104,7 +104,7 @@
     "number": 22,
     "name": "Lilli",
     "birthdate": "1.1.2015",
-    "position": "Heittävä takatyttö",
+    "position": "",
     "motto": "Taistele jokaisesta pallosta kuin se olisi viimeinen.",
     "about": "Joukkue on tosi yhtenäinen ja treeneissä on hyvä tunnelma.",
     "image": "lilli2.jpg"
@@ -114,7 +114,7 @@
     "number": 24,
     "name": "Sanni",
     "birthdate": "1.1.2015",
-    "position": "Sentteri",
+    "position": "",
     "motto": "Unelmat toteutuvat, kun tekee töitä niiden eteen.",
     "about": "EBT:ssä pelaaminen on kivaa – meillä on hyviä kavereita ja hyvä fiilis.",
     "image": "sanni.jpg"
@@ -124,7 +124,7 @@
     "number": 15,
     "name": "Stella",
     "birthdate": "1.1.2015",
-    "position": "Heittävä takatyttö",
+    "position": "",
     "motto": "Asenne ratkaisee – aina ja kaikkialla.",
     "about": "Meidän joukkueessa kaikki tsemppaavat toisiaan, ja se tekee tästä erityisen porukan.",
     "image": "stella.jpg"
@@ -134,7 +134,7 @@
     "number": 30,
     "name": "Linnea",
     "birthdate": "1.1.2015",
-    "position": "Pieni laitahyökkääjä",
+    "position": "",
     "motto": "Voittaminen alkaa harjoituksista.",
     "about": "Me treenataan kovaa mutta nauretaan myös paljon. Niko on superhyvä valmentaja.",
     "image": "linnea2.jpg"
@@ -144,7 +144,7 @@
     "number": 75,
     "name": "Tuana",
     "birthdate": "1.1.2015",
-    "position": "Pieni laitahyökkääjä",
+    "position": "",
     "motto": "Pieni joukkue, suuri sydän.",
     "about": "Meillä on hyvä yhteishenki ja kivoja pelaajia. Valmentaja on tosi kannustava.",
     "image": "tuana2.jpg"
@@ -154,7 +154,7 @@
     "number": 34,
     "name": "Saga",
     "birthdate": "1.1.2015",
-    "position": "Iso laitahyökkääjä",
+    "position": "",
     "motto": "Anna kaikkesi – myös harjoituksissa.",
     "about": "Täällä on tosi hyvä meininki ja paljon kavereita. Niko osaa innostaa meitä.",
     "image": "saga.jpg"
@@ -164,7 +164,7 @@
     "number": 31,
     "name": "Viola",
     "birthdate": "1.1.2015",
-    "position": "Sentteri",
+    "position": "",
     "motto": "Kentällä ei pelätä, siellä pelataan.",
     "about": "Meillä on hyvä porukka ja kaikilla on halu kehittyä. Niko on huippu!",
     "image": "viola2.jpg"
@@ -174,7 +174,7 @@
     "number": 18,
     "name": "Stella",
     "birthdate": "1.1.2015",
-    "position": "Pieni laitahyökkääjä",
+    "position": "",
     "motto": "Taistele joukkueen puolesta, ei vain itsesi.",
     "about": "Kaikki tekee parhaansa ja tukee toisiaan. Tosi hyvä fiilis aina treeneissä.",
     "image": "stella-2.jpg"
@@ -184,7 +184,7 @@
     "number": 25,
     "name": "Emelie",
     "birthdate": "1.1.2015",
-    "position": "Heittävä takatyttö",
+    "position": "",
     "motto": "Asenne voittaa taidon, jos tahto on tarpeeksi suuri.",
     "about": "EBT:ssä on ihan paras joukkue! Kaikki on ystävällisiä ja valmentaja Niko on tosi hyvä.",
     "image": "emelie.jpg"
