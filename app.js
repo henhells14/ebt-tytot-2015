@@ -17,10 +17,10 @@ const SEASON_CONFIG = {
         team_id: '5753845',
         // KEVÄT (Current)
         group_id_current: '302568', 
-        group_index_current: 1,     // Kevät on listan toinen (index 1)
+        group_index_current: 0,     // Kevät on listan toinen (index 1)
         // SYKSY (Previous)
         group_id_prev: '302370',
-        group_index_prev: 0         // Syksy on listan ensimmäinen (index 0)
+        group_index_prev: 1         // Syksy on listan ensimmäinen (index 0)
     },
     
     // 2. Divisioona
@@ -29,10 +29,10 @@ const SEASON_CONFIG = {
         team_id: '5753846',
         // KEVÄT (Current)
         group_id_current: '302571',
-        group_index_current: 1,
+        group_index_current: 0,
         // SYKSY (Previous)
         group_id_prev: '302369',
-        group_index_prev: 0
+        group_index_prev: 1
     }
 };
 
