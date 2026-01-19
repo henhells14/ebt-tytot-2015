@@ -12,6 +12,8 @@
             <a href="/sarjataulukko" class="nav-btn <%= page === 'sarjataulukko' ? 'active' : '' %>">Sarjataulukko</a>
             <a href="/ottelut" class="nav-btn <%= page === 'ottelut' ? 'active' : '' %>">Ottelut</a>
             <a href="/pelaajat" class="nav-btn <%= page === 'pelaajat' ? 'active' : '' %>">Pelaajat</a>
+            
+            <a href="https://team-gallery.vercel.app/" class="nav-btn" target="_blank">Galleria</a>
         </div>
     </div>
     
@@ -26,6 +28,8 @@
             <a href="/sarjataulukko" class="<%= page === 'sarjataulukko' ? 'active' : '' %>">Sarjataulukko</a>
             <a href="/ottelut" class="<%= page === 'ottelut' ? 'active' : '' %>">Ottelut</a>
             <a href="/pelaajat" class="<%= page === 'pelaajat' ? 'active' : '' %>">Pelaajat</a>
+            
+            <a href="https://team-gallery.vercel.app/" target="_blank">Galleria</a>
         </div>
     </div>
 </header>
@@ -38,18 +42,15 @@
         const basketball = document.querySelector('.basketball-nav');
         const navMenu = document.querySelector('.nav-menu');
         
-        // Lasketaan dynaamisesti kuinka leveä valikko on, jotta pallo vierii juuri oikean verran
-        // Jos valikon leveys on esim 500px, lisätään vähän marginaalia (esim +70px)
-        const menuWidth = navMenu.offsetWidth || 500; 
+        // Lasketaan dynaamisesti kuinka leveä valikko on
+        const menuWidth = navMenu.offsetWidth || 700; // Kasvatin oletusleveyttä hieman, koska nappi tuli lisää
         const rollDistance = menuWidth + 100; 
 
         if (!navOpen) {
-            // Avaa: Pallo vierii oikealle ja pyörii
             basketball.style.transform = `translateX(${rollDistance}px) rotate(360deg)`;
             navMenu.classList.add('show');
             navOpen = true;
         } else {
-            // Sulje: Pallo palaa takaisin
             basketball.style.transform = 'translateX(0) rotate(0deg)';
             navMenu.classList.remove('show');
             navOpen = false;
@@ -65,8 +66,8 @@
         
         if (hamburger && mobileMenu) {
             if (!mobileNavOpen) {
-                hamburger.classList.add('open'); // Muuttaa viivat ruksiksi (CSS)
-                mobileMenu.classList.add('show'); // Tuo valikon esiin
+                hamburger.classList.add('open');
+                mobileMenu.classList.add('show');
                 mobileNavOpen = true;
             } else {
                 hamburger.classList.remove('open');
@@ -78,7 +79,6 @@
 
     // --- EVENT LISTENERIT ---
     document.addEventListener('DOMContentLoaded', function() {
-        // Liitetään klikkauskuuntelija hamburgeriin
         const hamburger = document.querySelector('.hamburger');
         if (hamburger) {
             hamburger.addEventListener('click', toggleMobileNav);
@@ -87,18 +87,14 @@
 
     // Sulje navigaatio jos klikataan valikon ohi
     document.addEventListener('click', function(e) {
-        // Desktopin sulkeminen
+        // Desktop
         const headerLeft = document.querySelector('.header-left');
-        const basketball = document.querySelector('.basketball-nav');
-        
-        // Jos klikkaus ei osunut header-alueeseen JA valikko on auki -> sulje se
         if (navOpen && headerLeft && !headerLeft.contains(e.target)) {
             toggleNav();
         }
 
-        // Mobiilin sulkeminen
+        // Mobiili
         const mobileNav = document.querySelector('.mobile-nav');
-        // Jos klikkaus ei osunut mobiilivalikkoon JA se on auki -> sulje se
         if (mobileNavOpen && mobileNav && !mobileNav.contains(e.target)) {
             toggleMobileNav();
         }
