@@ -107,7 +107,7 @@ function luoOtteluKorttiHTML(match, sarjaNimi) {
         <div class="match-card" onclick="avaaOtteluModal('${safeOpponent}', '${sarjaNimi}', '${dateStr}', '${timeStr}', '${safeVenue}')">
             <h3>${sarjaNimi}</h3>
             <div class="match-details">
-                <div class="match-date">${dateStr}. klo ${timeStr}</div>
+                <div class="match-date">${dateStr} klo ${timeStr}</div>
                 <div class="teams-container">
                     <div class="team-side">
                         <img src="${logoA}" alt="${match.team_A_name}" class="match-logo" onerror="this.src='/images/basketball-logo.png'">
