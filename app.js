@@ -9,30 +9,34 @@ const playersRouter = require('./routes/players');
 
 // ============ CONFIGURATION ============
 const SEASON_CONFIG = {
-    competition_id: 'etekp2526',
+    competition_id: 'etekp2627', // Uusi kausi 2026-2027
     
-    // 1. Divisioona
+    // 1. Divisioona (T12)
     div1: {
-        category_id: '38751',
-        team_id: '5753845',
-        // KEVÄT (Current)
-        group_id_current: '302568', 
-        group_index_current: 0,     // Kevät on listan toinen (index 1)
-        // SYKSY (Previous)
-        group_id_prev: '302370',
-        group_index_prev: 1         // Syksy on listan ensimmäinen (index 0)
+        category_id: '35423', 
+        team_id: '5753845',   // (Tämä tiimi-ID säilyy yleensä samana seuralla)
+        
+        // KEVÄT 2027 (Ei vielä alkanut, joten jätetään tyhjäksi)
+        group_id_current: '', 
+        group_index_current: 1,
+        
+        // SYKSY 2026 (Basket.fi uudet ID:t)
+        group_id_prev: '303083', 
+        group_index_prev: 0         
     },
     
-    // 2. Divisioona
+    // 2. Divisioona (T12)
     div2: {
-        category_id: '38753',
+        category_id: '35425',
         team_id: '5753846',
-        // KEVÄT (Current)
-        group_id_current: '302571',
-        group_index_current: 0,
-        // SYKSY (Previous)
-        group_id_prev: '302369',
-        group_index_prev: 1
+        
+        // KEVÄT 2027
+        group_id_current: '',
+        group_index_current: 1,
+        
+        // SYKSY 2026
+        group_id_prev: '303086',
+        group_index_prev: 0
     }
 };
 
@@ -89,7 +93,7 @@ app.get('/api/sarjataulukko', async (req, res) => {
         res.json({
             div1: div1Res.data.category?.groups?.[d1Index] || null,
             div2: div2Res.data.category?.groups?.[d2Index] || null,
-            season: isAutumn ? 'Syksy 2025' : 'Kevät 2026'
+            season: isAutumn ? 'Syksy 2026' : 'Kevät 2027'
         });
 
     } catch (error) {
@@ -129,7 +133,7 @@ const [div1Response, div2Response] = await Promise.all([
         res.json({
             div1: filterPlayed(div1Response.data.matches),
             div2: filterPlayed(div2Response.data.matches),
-            season: isAutumn ? 'Syksy 2025' : 'Kevät 2026'
+            season: isAutumn ? 'Syksy 2026' : 'Kevät 2027'
         });
     } catch (error) {
         console.error('API Error (pelatut):', error.message);

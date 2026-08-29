@@ -15,7 +15,7 @@ async function lataaSeuraavatOttelut() {
             fetch('/api/tulevat-ottelut'),
             fetch('/api/ebt-ottelut'),
             fetch('/api/ebt-ottelut?kausi=syksy'),
-            fetch('/api/sarjataulukko')
+            fetch('/api/sarjataulukko?kausi=syksy')
         ]);
 
         const upcomingData = await upcomingRes.json();

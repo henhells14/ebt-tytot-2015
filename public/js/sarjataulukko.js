@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Ladataan oletuksena Kevät (ilman parametreja)
-    lataaSarjataulukot(); 
-    lataaOttelut();
+    // Haetaan sivu heti Syksyn tiedoilla
+    lataaSarjataulukot('?kausi=syksy'); 
+    lataaOttelut('?kausi=syksy');
 });
 
 // Tämä funktio kutsutaan napeista
